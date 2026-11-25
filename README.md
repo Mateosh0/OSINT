@@ -1,0 +1,3 @@
+# ClipMind AI
+GitHub Pages: upload all files to repository root, Settings → Pages → Deploy from a branch → main → root.
+Use Safari, keep page foreground. 30–300 seconds, up to 200 MB. First analysis downloads Transformers.js and quantized Whisper Tiny from CDN/Hugging Face. No API key, no video upload. WASM inference can be slow or fail on iPhone; fallback is visual motion only. Ranking combines motion, speech density and punctuation/keywords, not semantic understanding or viral prediction. Export uses canvas and MediaRecorder with center crop, 540×960, browser-supported MP4/WebM. Audio decoding and export compatibility depend on Safari and input codec. No burned-in subtitles, face tracking, PWA or background processing. Not tested on physical iPhone or deployed Pages.

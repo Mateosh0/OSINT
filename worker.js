@@ -1,0 +1,4 @@
+import {pipeline,env} from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.2';
+env.allowLocalModels=false;env.backends.onnx.wasm.numThreads=1;
+let model;
+self.onmessage=async({data})=>{try{model ||= await pipeline('automatic-speech-recognition','onnx-community/whisper-tiny',{device:'wasm',dtype:'q8',progress_callback:p=>self.postMessage({kind:'progress',message:p.status==='progress'?`Модель: ${Math.round(p.progress||0)}%`:`Модель: ${p.status}`})});const opts={return_timestamps:true,chunk_length_s:25,stride_length_s:4,task:'transcribe'};if(data.lang)opts.language=data.lang;const out=await model(data.audio,opts);self.postMessage({kind:'done',chunks:out.chunks||[]});}catch(e){self.postMessage({kind:'error',message:String(e.message||e)});}};
